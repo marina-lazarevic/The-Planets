@@ -1,0 +1,31 @@
+//-------------- COLORS --------------//
+
+$light: #ffffff;
+$dark: #070724;
+$mercury: #DEF4FC;
+$venus: #eda249;
+$earth: #545BFE;
+$mars: #d83a34;
+$jupiter: #ECAD7A;
+$saturn: #FCCB6B;
+$uranus: #1ec2a4;
+$neptune: #2d68f0;
+
+//-------------- BREAKPOINTS --------------//
+
+$screen-sm: 30rem;
+$screen-md: 48rem;
+$screen-lg: 67.5rem;
+$screen-xl: 123.75rem;
+
+//-------------- TRANSITIONS --------------//
+
+$default-transition: cubic-bezier(0.19, 1, 0.22, 1);
+
+//-------------- LAYOUT --------------//
+
+@mixin d-flex($a, $j) {
+    display: flex;
+    align-items: $a;
+    justify-content: $j;
+}
