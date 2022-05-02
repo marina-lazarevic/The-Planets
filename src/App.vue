@@ -3,8 +3,15 @@
 </template>
 
 <script>
+import json from '@/data/data.json';
+
 export default {
   name: 'App',
+  data() {
+    return {
+      planets: json,
+    }
+  }
 }
 </script>
 
