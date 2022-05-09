@@ -94,10 +94,12 @@ export default {
     height: fit-content;
     width: fit-content;
     overflow: hidden;
+    flex-shrink: 0;
 
     span {
       display: block;
-      transition: transform 2s a.$default-transition;
+      width: fit-content;
+      transition: 2s a.$default-transition;
     }
 
     @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg){
@@ -108,16 +110,18 @@ export default {
   &__branding-transition-enter-active,
   &__branding-transition-leave-active {
     @media screen and (min-width: a.$screen-md) {
-          span {
-      transform: translateY(0);
-    }
+      span {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   }
 
   &__branding-transition-enter-from,
   &__branding-transition-leave-to {
     @media screen and (min-width: a.$screen-md) {
-          span {
+      span {
+      opacity: 0;
       transform: translateY(200%);
     }
     }
