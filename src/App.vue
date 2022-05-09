@@ -70,9 +70,26 @@ export default {
   background-color: a.$dark;
   z-index: 10;
 
+  @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+  }
+
+  @media screen and (min-width: a.$screen-md) {
+    position: static;
+  }
+
+  @media screen and (min-width: a.$screen-lg) {
+    padding: 1.5rem 2.5rem;
+  }
+
   &__branding {
     @include a.antonio-md;
     white-space: nowrap;
+
+    @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg){
+      padding-bottom: 2rem;
+    }
   }
 
   &__hamburger-btn {
@@ -131,6 +148,21 @@ export default {
     flex-direction: column;
     background-color: a.$dark;
     transition: opacity 1.2s ease-out;
+
+    @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
+      justify-content: center;
+    }
+
+    @media screen and (min-width: a.$screen-md) {
+      flex-direction: row;
+      position: static;
+      height: fit-content;
+      padding: 0;
+    }
+
+    @media screen and (min-width: a.$screen-lg) {
+      justify-content: flex-end;
+    }
   }
 
   &__planet-btn {
@@ -177,7 +209,7 @@ export default {
 
     span, &::before {
       display: block;
-      transition: 1.5s a.$default-transition;
+      transition: transform 1.5s a.$default-transition;
     }
 
     $i: 1;
@@ -189,6 +221,30 @@ export default {
         }
       }
     }
+
+    @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
+      &::before{
+        display: none;
+      }
+    }
+
+     @media screen and (min-width: a.$screen-md) {
+       @include a.jost-bold-sm;
+       width: fit-content;
+       padding: 0 .8rem;
+     }
+
+      @media screen and (min-width: a.$screen-lg) {
+       position: relative;
+       &::before {
+         position: absolute;
+         border-radius: 0;
+         height: 3px;
+         width: 100%;
+         left: 0;
+         top: -2rem;
+       }
+     }
   }
 
   &__nav-transition-enter-active,
