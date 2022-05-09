@@ -1,22 +1,15 @@
 <template>
   <header class="header">
     <a href="/" class="header__branding">The Planets</a>
-    <nav
-      class="header__nav"
-      v-if="nav_visibility === true || screen_sm === false">
-      <button
-        v-for="planet in planets"
-        :key="planet.name"
-        @click="
-          selectThePlanet(planet);
-          this.nav_visibility = !this.nav_visibility;" 
-          :class="'header__planet-btn header__planet-btn--' + planet.name.toLowerCase()">
+    <Transition name="header__nav-transition">
+    <nav class="header__nav" v-show="nav_visibility === true || screen_sm === false">
+      <button v-for="planet in planets" :key="planet.name" @click="selectThePlanet(planet); this.nav_visibility = !this.nav_visibility;" :class="'header__planet-btn header__planet-btn--' + planet.name.toLowerCase()">
         <span>{{ planet.name }}</span>
       </button>
     </nav>
+    </Transition>
     <button
       class="header__hamburger-btn"
-      :class="{ close: this.nav_visibility }"
       @click="this.nav_visibility = !this.nav_visibility"
       v-if="screen_sm === true">
       <span class="header__bar"></span>
@@ -137,6 +130,7 @@ export default {
     @include a.d-flex(flex-start, flex-start);
     flex-direction: column;
     background-color: a.$dark;
+    transition: opacity 1.2s ease-out;
   }
 
   &__planet-btn {
@@ -144,7 +138,8 @@ export default {
     @include a.d-flex(center, unset);
     padding: 1.5rem 0;
     width: 100%;
-    border-bottom: 1px solid rgba(a.$light, $alpha: 0.1);
+    height: fit-content;
+    overflow: hidden;
 
     &--mercury::before {
       background-color: a.$mercury;
@@ -178,6 +173,41 @@ export default {
       border-radius: 50%;
       margin-right: 2em;
       flex-shrink: 0;
+    }
+
+    span, &::before {
+      display: block;
+      transition: 1.5s a.$default-transition;
+    }
+
+    $i: 1;
+
+    @for $i from 1 through 8 {
+      &:nth-of-type(#{$i}){
+        span, &::before {
+          transition-delay: #{$i * .07}s;
+        }
+      }
+    }
+  }
+
+  &__nav-transition-enter-active,
+  &__nav-transition-leave-active {
+    opacity: 1;
+    .header__planet-btn {
+      span, &::before {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &__nav-transition-enter-from,
+  &__nav-transition-leave-to {
+    opacity: 0;
+    .header__planet-btn {
+      span, &::before {
+        transform: translateY(300%);
+      }
     }
   }
 }
