@@ -80,7 +80,7 @@ export default {
   }
 
   @media screen and (min-width: a.$screen-lg) {
-    padding: 1.5rem 2.5rem;
+    padding: 0 1.5rem;
   }
 
   &__branding {
@@ -236,13 +236,26 @@ export default {
 
       @media screen and (min-width: a.$screen-lg) {
        position: relative;
+       transition: color .2s ease-out;
+       padding-top: 1.8rem;
+       margin-bottom: 1.8rem;
+
+       &:hover {
+         color: a.$light;
+         &::before {
+           opacity: 1;
+         }
+       }
+
        &::before {
          position: absolute;
          border-radius: 0;
          height: 3px;
          width: 100%;
          left: 0;
-         top: -2rem;
+         top: 0;
+         transform: none !important;
+         opacity: 0;
        }
      }
   }
