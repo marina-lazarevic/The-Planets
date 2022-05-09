@@ -1,16 +1,24 @@
 <template>
   <header class="header">
     <a href="/" class="header__branding">The Planets</a>
-    <nav class="header__nav" v-if="nav_visibility === true || screen_sm === false">
-      <button v-for="planet in planets" :key="planet.name" @click="selectThePlanet(planet)">
-        {{ planet.name }}
+    <nav
+      class="header__nav"
+      v-if="nav_visibility === true || screen_sm === false">
+      <button
+        v-for="planet in planets"
+        :key="planet.name"
+        @click="
+          selectThePlanet(planet);
+          this.nav_visibility = !this.nav_visibility;" 
+          :class="'header__planet-btn header__planet-btn--' + planet.name.toLowerCase()">
+        <span>{{ planet.name }}</span>
       </button>
     </nav>
     <button
       class="header__hamburger-btn"
+      :class="{ close: this.nav_visibility }"
       @click="this.nav_visibility = !this.nav_visibility"
-      v-if="screen_sm === true"
-    >
+      v-if="screen_sm === true">
       <span class="header__bar"></span>
       <span class="header__bar"></span>
       <span class="header__bar"></span>
@@ -66,15 +74,36 @@ export default {
   width: 100vw;
   top: 0;
   left: 0;
+  background-color: a.$dark;
+  z-index: 10;
 
   &__branding {
     @include a.antonio-md;
+    white-space: nowrap;
   }
 
   &__hamburger-btn {
     width: 28px;
     height: 22px;
     position: relative;
+    transition: .5s a.$default-transition;
+
+    &.close {
+      transform: rotate(90deg);
+      .header__bar {
+        &:nth-of-type(1){
+          transform: rotate(45deg) translate(7px, 6px);
+        }
+
+        &:nth-of-type(2){
+          transform: rotate(-45deg);
+        }
+
+        &:nth-of-type(3){
+          opacity: 0;
+        }
+      }
+    }
   }
 
   &__bar {
@@ -83,6 +112,7 @@ export default {
     height: 3px;
     width: 100%;
     left: 0;
+    transition: transform .3s a.$default-transition;
 
     &:nth-of-type(1) {
       top: 0;
@@ -94,6 +124,60 @@ export default {
 
     &:nth-of-type(3) {
       bottom: 1px;
+    }
+  }
+
+  &__nav {
+    position: absolute;
+    height: calc(100vh - 74.07px);
+    width: 100vw;
+    top: calc(100% + 1.2px);
+    left: 0;
+    padding: 1.5rem;
+    @include a.d-flex(flex-start, flex-start);
+    flex-direction: column;
+    background-color: a.$dark;
+  }
+
+  &__planet-btn {
+    @include a.jost-bold-md;
+    @include a.d-flex(center, unset);
+    padding: 1.5rem 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(a.$light, $alpha: 0.1);
+
+    &--mercury::before {
+      background-color: a.$mercury;
+    }
+    &--venus::before {
+      background-color: a.$venus;
+    }
+    &--earth::before {
+      background-color: a.$earth;
+    }
+    &--mars::before {
+      background-color: a.$mars;
+    }
+    &--jupiter::before {
+      background-color: a.$jupiter;
+    }
+    &--saturn::before {
+      background-color: a.$saturn;
+    }
+    &--uranus::before {
+      background-color: a.$uranus;
+    }
+    &--neptune::before {
+      background-color: a.$neptune;
+    }
+
+    &::before {
+      content: "";
+      width: 1.2em;
+      height: 1.2em;
+      border-radius: 50%;
+      margin-right: 2em;
+      flex-shrink: 0;
     }
   }
 }
