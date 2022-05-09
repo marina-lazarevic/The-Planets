@@ -181,7 +181,7 @@ export default {
     @include a.d-flex(flex-start, flex-start);
     flex-direction: column;
     background-color: a.$dark;
-    transition: opacity 1.2s ease-out;
+    transition: opacity 1.5s ease-out;
 
     @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
       justify-content: center;
