@@ -10,6 +10,7 @@
     </Transition>
     <button
       class="header__hamburger-btn"
+      :class="{ close: this.nav_visibility }"
       @click="this.nav_visibility = !this.nav_visibility"
       v-if="screen_sm === true">
       <span class="header__bar"></span>
@@ -80,7 +81,7 @@ export default {
   }
 
   @media screen and (min-width: a.$screen-lg) {
-    padding: 0 1.5rem;
+    padding: 0 1.5rem 0 2.3rem;
   }
 
   &__branding {
@@ -96,7 +97,7 @@ export default {
     width: 28px;
     height: 22px;
     position: relative;
-    transition: .5s a.$default-transition;
+    transition: 1.2s a.$default-transition;
 
     &.close {
       transform: rotate(90deg);
@@ -104,13 +105,12 @@ export default {
         &:nth-of-type(1){
           transform: rotate(45deg) translate(7px, 6px);
         }
-
         &:nth-of-type(2){
-          transform: rotate(-45deg);
+          transition: 0s;
+          width: 0;
         }
-
         &:nth-of-type(3){
-          opacity: 0;
+          transform: rotate(-45deg) translate(6px, -6px);
         }
       }
     }
@@ -122,7 +122,7 @@ export default {
     height: 3px;
     width: 100%;
     left: 0;
-    transition: transform .3s a.$default-transition;
+    transition: transform 1.2s a.$default-transition, width 1.2s a.$default-transition;
 
     &:nth-of-type(1) {
       top: 0;
@@ -228,13 +228,13 @@ export default {
       }
     }
 
-     @media screen and (min-width: a.$screen-md) {
+    @media screen and (min-width: a.$screen-md) {
        @include a.jost-bold-sm;
        width: fit-content;
        padding: 0 .8rem;
-     }
+    }
 
-      @media screen and (min-width: a.$screen-lg) {
+    @media screen and (min-width: a.$screen-lg) {
        position: relative;
        transition: color .2s ease-out;
        padding-top: 1.8rem;
@@ -257,7 +257,7 @@ export default {
          transform: none !important;
          opacity: 0;
        }
-     }
+    }
   }
 
   &__nav-transition-enter-active,
