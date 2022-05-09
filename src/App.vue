@@ -1,6 +1,8 @@
 <template>
   <header class="header">
-    <a href="/" class="header__branding">The Planets</a>
+    <Transition name="header__branding-transition">
+      <a v-show="show === true || this.screen_sm === false" href="/" class="header__branding"><span>The Planets</span></a>
+    </Transition>
     <Transition name="header__nav-transition">
     <nav class="header__nav" v-show="nav_visibility === true || screen_sm === false">
       <button v-for="planet in planets" :key="planet.name" @click="selectThePlanet(planet); this.nav_visibility = !this.nav_visibility;" :class="'header__planet-btn header__planet-btn--' + planet.name.toLowerCase()">
@@ -31,6 +33,7 @@ export default {
       planet: {},
       nav_visibility: false,
       screen_sm: true,
+      show: false
     };
   },
 
@@ -52,6 +55,7 @@ export default {
     window.addEventListener("resize", () => {
       this.screenSize();
     });
+    this.show = true;
   },
 };
 </script>
@@ -87,9 +91,35 @@ export default {
   &__branding {
     @include a.antonio-md;
     white-space: nowrap;
+    height: fit-content;
+    width: fit-content;
+    overflow: hidden;
+
+    span {
+      display: block;
+      transition: transform 2s a.$default-transition;
+    }
 
     @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg){
       padding-bottom: 2rem;
+    }
+  }
+
+  &__branding-transition-enter-active,
+  &__branding-transition-leave-active {
+    @media screen and (min-width: a.$screen-md) {
+          span {
+      transform: translateY(0);
+    }
+    }
+  }
+
+  &__branding-transition-enter-from,
+  &__branding-transition-leave-to {
+    @media screen and (min-width: a.$screen-md) {
+          span {
+      transform: translateY(200%);
+    }
     }
   }
 
