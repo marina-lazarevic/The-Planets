@@ -1,0 +1,25 @@
+@use 'abstract/index' as a;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: a.$dark;
+  }
+
+  button {
+      background: none;
+      border: none;
+      outline: none;
+
+      &:hover {
+          cursor: pointer;
+      }
+  }
+
+  a {
+      text-decoration: none;
+  }
