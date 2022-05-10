@@ -1,20 +1,40 @@
 <template>
   <header class="header">
     <Transition name="header__branding-transition">
-      <a v-show="show === true || this.screen_sm === false" href="/" class="header__branding"><span>The Planets</span></a>
+      <a
+        v-show="show === true || this.screen_sm === false"
+        href="/"
+        class="header__branding"
+        ><span>The Planets</span></a
+      >
     </Transition>
     <Transition name="header__nav-transition">
-    <nav class="header__nav" v-show="nav_visibility === true || screen_sm === false">
-      <button v-for="planet in planets" :key="planet.name" @click="selectThePlanet(planet); this.nav_visibility = !this.nav_visibility;" :class="'header__planet-btn header__planet-btn--' + planet.name.toLowerCase()">
-        <span>{{ planet.name }}</span>
-      </button>
-    </nav>
+      <nav
+        class="header__nav"
+        v-show="nav_visibility === true || screen_sm === false"
+      >
+        <button
+          v-for="planet in planets"
+          :key="planet.name"
+          @click="
+            selectThePlanet(planet);
+            this.nav_visibility = !this.nav_visibility;
+          "
+          :class="
+            'header__planet-btn header__planet-btn--' +
+            classNames(planet.name)
+          "
+        >
+          <span>{{ planet.name }}</span>
+        </button>
+      </nav>
     </Transition>
     <button
       class="header__hamburger-btn"
       :class="{ close: this.nav_visibility }"
       @click="this.nav_visibility = !this.nav_visibility"
-      v-if="screen_sm === true">
+      v-if="screen_sm === true"
+    >
       <span class="header__bar"></span>
       <span class="header__bar"></span>
       <span class="header__bar"></span>
@@ -33,7 +53,7 @@ export default {
       planet: {},
       nav_visibility: false,
       screen_sm: true,
-      show: false
+      show: false,
     };
   },
 
@@ -48,9 +68,16 @@ export default {
         ? (this.screen_sm = false)
         : (this.screen_sm = true);
     },
+
+    classNames(name){
+      let className = '';
+      this.planet.name === name ? className = 'active' : className = '';
+      return name.toLowerCase() + ' ' + className;
+    }
   },
 
   mounted() {
+    this.planet = this.planets[0];
     this.screenSize();
     window.addEventListener("resize", () => {
       this.screenSize();
@@ -102,7 +129,7 @@ export default {
       transition: 2s a.$default-transition;
     }
 
-    @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg){
+    @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
       padding-bottom: 2rem;
     }
   }
@@ -121,9 +148,9 @@ export default {
   &__branding-transition-leave-to {
     @media screen and (min-width: a.$screen-md) {
       span {
-      opacity: 0;
-      transform: translateY(200%);
-    }
+        opacity: 0;
+        transform: translateY(200%);
+      }
     }
   }
 
@@ -136,14 +163,14 @@ export default {
     &.close {
       transform: rotate(90deg);
       .header__bar {
-        &:nth-of-type(1){
+        &:nth-of-type(1) {
           transform: rotate(45deg) translate(7px, 6px);
         }
-        &:nth-of-type(2){
+        &:nth-of-type(2) {
           transition: 0s;
           width: 0;
         }
-        &:nth-of-type(3){
+        &:nth-of-type(3) {
           transform: rotate(-45deg) translate(6px, -6px);
         }
       }
@@ -156,7 +183,8 @@ export default {
     height: 3px;
     width: 100%;
     left: 0;
-    transition: transform 1.2s a.$default-transition, width 1.2s a.$default-transition;
+    transition: transform 1.2s a.$default-transition,
+      width 1.2s a.$default-transition;
 
     &:nth-of-type(1) {
       top: 0;
@@ -241,7 +269,8 @@ export default {
       flex-shrink: 0;
     }
 
-    span, &::before {
+    span,
+    &::before {
       display: block;
       transition: transform 1.5s a.$default-transition;
     }
@@ -249,48 +278,50 @@ export default {
     $i: 1;
 
     @for $i from 1 through 8 {
-      &:nth-of-type(#{$i}){
-        span, &::before {
-          transition-delay: #{$i * .07}s;
+      &:nth-of-type(#{$i}) {
+        span,
+        &::before {
+          transition-delay: #{$i * 0.07}s;
         }
       }
     }
 
     @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
-      &::before{
+      &::before {
         display: none;
       }
     }
 
     @media screen and (min-width: a.$screen-md) {
-       @include a.jost-bold-sm;
-       width: fit-content;
-       padding: 0 .8rem;
+      @include a.jost-bold-sm;
+      width: fit-content;
+      padding: 0 0.8rem;
     }
 
     @media screen and (min-width: a.$screen-lg) {
-       position: relative;
-       transition: color .2s ease-out;
-       padding-top: 1.8rem;
-       margin-bottom: 1.8rem;
+      position: relative;
+      transition: color 0.2s ease-out;
+      padding-top: 1.8rem;
+      margin-bottom: 1.8rem;
 
-       &:hover {
-         color: a.$light;
-         &::before {
-           opacity: 1;
-         }
-       }
+      &.active,
+      &:hover {
+        color: a.$light;
+        &::before {
+          opacity: 1;
+        }
+      }
 
-       &::before {
-         position: absolute;
-         border-radius: 0;
-         height: 3px;
-         width: 100%;
-         left: 0;
-         top: 0;
-         transform: none !important;
-         opacity: 0;
-       }
+      &::before {
+        position: absolute;
+        border-radius: 0;
+        height: 3px;
+        width: 100%;
+        left: 0;
+        top: 0;
+        transform: none !important;
+        opacity: 0;
+      }
     }
   }
 
@@ -298,7 +329,8 @@ export default {
   &__nav-transition-leave-active {
     opacity: 1;
     .header__planet-btn {
-      span, &::before {
+      span,
+      &::before {
         transform: translateY(0);
       }
     }
@@ -308,7 +340,8 @@ export default {
   &__nav-transition-leave-to {
     opacity: 0;
     .header__planet-btn {
-      span, &::before {
+      span,
+      &::before {
         transform: translateY(300%);
       }
     }
