@@ -1,15 +1,18 @@
 <template>
   <MainNav :planets="planets" :planet="planet" @getPlanet="showPlanet"/>
+  <ThePlanet :planet="planet"/>
 </template>
 
 <script>
 import json from "@/data/data.json";
 import MainNav from "@/components/MainNav.vue";
+import ThePlanet from "@/components/ThePlanet.vue";
 
 export default {
   name: "App",
   components: {
     MainNav,
+    ThePlanet
   },
 
   data() {
