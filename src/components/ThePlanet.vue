@@ -12,24 +12,30 @@
                 </div>
             </article>
         </div>
+        <div class="planet__data">
+            <PlanetData v-for="item in data_type" :key="item" :d_type="getType(item)" :d_item="item" class="planet__data-wrapper"/>
+        </div>
     </section>
 </template>
 
 <script>
 import ContentToggleButton from '@/components/ContentToggleButton.vue';
 import PlanetContent from '@/components/PlanetContent.vue';
+import PlanetData from '@/components/PlanetData.vue';
 
 export default {
     name: 'ThePlanet',
     props: ['planet'],
     components: {
         ContentToggleButton,
-        PlanetContent
+        PlanetContent,
+        PlanetData
     },
 
     data(){
         return {
             content_type: [],
+            data_type: [],
             content: this.planet.overview,
         }
     },
@@ -47,6 +53,7 @@ export default {
 
     beforeMount(){
         this.content_type.push(this.planet.overview, this.planet.structure, this.planet.geology)
+        this.data_type.push(this.planet.rotation, this.planet.revolution, this.planet.radius, this.planet.temperature)
     },
 }
 </script>
