@@ -68,3 +68,21 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+@use '@/scss/abstract/index' as a;
+
+.planet {
+
+    &__img-container {
+        width: 100%;
+        height: fit-content;
+        margin-top: 120px;
+        @include a.d-flex(center, center);
+
+        img {
+            transform: scale(.55);
+        }
+    }
+}
+</style>

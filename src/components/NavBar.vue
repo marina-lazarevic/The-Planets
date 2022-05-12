@@ -138,7 +138,7 @@ export default {
     padding: 1rem 1.5rem 1.3rem;
     @include a.d-flex(flex-start, flex-start);
     flex-direction: column;
-    transition: opacity 1.6s a.$default-transition;
+    
 
     @media screen and (min-width: a.$screen-md) {
       position: static;
@@ -255,7 +255,6 @@ export default {
 
   &__nav-transition-enter-active,
   &__nav-transition-leave-active {
-    opacity: 1;
     .header__nav-btn {
       span,
       &::before {
@@ -266,13 +265,17 @@ export default {
 
   &__nav-transition-enter-from,
   &__nav-transition-leave-to {
-    opacity: 0;
     .header__nav-btn {
       span,
       &::before {
         transform: translateY(300%);
       }
     }
+  }
+
+  &__nav-transition-leave-to {
+      opacity: 0;
+      transition: opacity 1.2s a.$default-transition 1.3s;
   }
 
   &__toggle-btn {
