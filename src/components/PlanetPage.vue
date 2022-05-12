@@ -1,7 +1,11 @@
 <template>
 <section class="planet">
   <div class="planet__row">
-    <div class="planet__img-container"></div>
+    <div class="planet__img-container">
+        <img :src="require(`@/assets/planet-${planet.name.toLowerCase()}.svg`)" :alt="planet.name" v-show="content_type == 'geology' || content_type == 'overview'">
+        <img :src="require(`@/assets/planet-${planet.name.toLowerCase()}-internal.svg`)" :alt="planet.name" v-show="content_type == 'structure'">
+        <img :src="require(`@/assets/geology-${planet.name.toLowerCase()}.png`)" :alt="planet.name" v-show="content_type == 'geology'">
+    </div>
     <div class="planet__info">
       <article class="planet__article">
         <h1 class="planet__name">{{ planet.name }}</h1>
@@ -40,7 +44,8 @@ export default {
 
   data() {
     return {
-      article: {}
+      article: {},
+      content_type: 'overview'
     };
   },
 
@@ -51,11 +56,14 @@ export default {
 
     toggleContent(content){
       this.article = content;
+      this.content_type = this.getKeyName(content);
     },
 
     btnClassName(item) {
       let c = this.getKeyName(item);
-      console.log(c)
+      let className = '';
+      c == this.content_type ? className = 'active' : className = '';
+      return className; 
     },
   }
 };
