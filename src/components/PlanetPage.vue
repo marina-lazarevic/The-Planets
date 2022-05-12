@@ -73,7 +73,7 @@ export default {
 @use '@/scss/abstract/index' as a;
 
 .planet {
-    padding: 0 1.5rem;
+    padding: 0 1.5rem 3rem;
     position: relative;
 
     @media screen and (min-width: a.$screen-lg) {
@@ -84,19 +84,19 @@ export default {
         width: 100%;
         height: fit-content;
         min-height: 450px;
-        margin-top: 74.1px;
         padding-top: 54.5px;
         @include a.d-flex(center, center);
         position: relative;
 
         img {
-            transform: scale(.55);
+            transform: scale(.4);
+            position: absolute;
         }
 
         img:nth-of-type(3){
             max-width: 100px;
             position: absolute;
-            transform: translateY(70%);
+            transform: translateY(80%);
         }
     }
 

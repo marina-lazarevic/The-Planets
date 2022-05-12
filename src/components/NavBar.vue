@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :style= "[this.nav_visibility ? {'position': 'fixed'} : {'position': 'relative'}]">
     <Transition name="header__branding-transition">
       <a href="/" v-show="show === true || this.screen_sm === false" class="header__branding">
         <span>The Planets</span>
@@ -70,15 +70,14 @@ export default {
 @use "@/scss/abstract/index" as a;
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
   padding: 1rem 1.5rem 1.3rem;
   border-bottom: 1px solid rgba(a.$light, $alpha: 0.2);
   background-color: a.$dark;
   @include a.d-flex(center, space-between);
   z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100vw;
 
   @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
     flex-direction: column;
