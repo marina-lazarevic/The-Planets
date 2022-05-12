@@ -305,7 +305,9 @@ export default {
       color: a.$light;
 
       &:hover {
+        border: 1px solid rgba(a.$light, $alpha: 0);
         background-color: a.$gray;
+        transition: background-color .2s ease-out;
       }
 
       &::before {
@@ -318,6 +320,7 @@ export default {
       &:hover {
         &::before {
           opacity: 0;
+          transition: opacity .2s ease-out;
         }
       }
     }
