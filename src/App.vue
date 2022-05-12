@@ -1,6 +1,8 @@
 <template>
+
 <NavBar :planets="planets" :planet="planet" @getPlanet="showPlanet"/>
 <PlanetPage :planet="planet"/>
+<img src="@/assets/background-stars.svg" alt="stars" class="bg-img">
 </template>
 
 <script>
@@ -36,6 +38,23 @@ export default {
 <style lang="scss">
 @use '@/scss/abstract/index' as a;
 @use '@/scss/boilerplate';
+
+main {
+  position: relative;
+}
+
+.bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: -1;
+
+  @media screen and (min-width: a.$screen-lg) {
+    width: 100%;
+    height: auto;
+  }
+}
 
 .header__nav-btn,
 .planet__toggle-btn {

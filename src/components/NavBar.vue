@@ -85,6 +85,7 @@ export default {
 
   @media screen and (min-width: a.$screen-md) {
     position: static;
+    background: none;
   }
 
   @media screen and (min-width: a.$screen-lg) {
