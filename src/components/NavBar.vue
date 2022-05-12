@@ -171,7 +171,7 @@ export default {
     &::before,
     span {
       display: block;
-      transition: transform 1.5s a.$default-transition;
+      transition: transform 1s a.$default-transition;
     }
 
     $i: 1;
@@ -229,29 +229,13 @@ export default {
     }
   }
 
-  &__nav-transition-enter-active,
-  &__nav-transition-leave-active {
-    .header__nav-btn {
-      span,
-      &::before {
-        transform: translateY(0);
-      }
-    }
-  }
-
-  &__nav-transition-enter-from,
-  &__nav-transition-leave-to {
+  &__nav-transition-enter-from {
     .header__nav-btn {
       span,
       &::before {
         transform: translateY(300%);
       }
     }
-  }
-
-  &__nav-transition-leave-to {
-      opacity: 0;
-      transition: opacity 1.2s a.$default-transition 1.3s;
   }
 
   &__toggle-btn {
