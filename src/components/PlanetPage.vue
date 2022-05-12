@@ -32,7 +32,7 @@
             <a :href="article.source"
               >Wikipedia
               <svg
-                class="planet__svg"
+                class="planet__svg-arrow"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 278.56 278.56"
               >
@@ -54,7 +54,11 @@
               btnClassName(item)
             "
           >
+          <span class="planet__btn-index">{{index}}</span>
             {{ getKeyName(item) }}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="planet__chevron">
+            <path d="M328 112L184 256l144 144" />
+            </svg>
           </button>
         </div>
       </div>
@@ -233,8 +237,7 @@ export default {
     }
   }
 
-
-  &__svg {
+  &__svg-arrow {
     height: 0.6rem;
     width: auto;
     path {
@@ -317,6 +320,38 @@ export default {
           opacity: 0;
         }
       }
+    }
+  }
+
+  &__btn-index {
+      display: none;
+      @media screen and (min-width: a.$screen-md) {
+        display: inline-block;
+        opacity: .5;
+        margin-right: 1.2rem;
+        &::before {
+            content: '0';
+        }
+      }
+  }
+
+  &__chevron {
+    display: none;
+    @media screen and (min-width: a.$screen-md) {
+        display: block;
+        height: 1.5em;
+        width: auto;
+        position: absolute;
+        top: 50%;
+        right: 1.2rem;
+        transform: translateY(-50%) rotate(180deg);
+        path {
+            fill: none;
+            stroke: rgba(a.$light, $alpha: .5);
+            stroke-linecap: square;
+            stroke-miterlimit: 10;
+            stroke-width: 65px;
+        }
     }
   }
 
