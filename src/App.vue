@@ -1,41 +1,40 @@
 <template>
-  <MainNav :planets="planets" :planet="planet" @getPlanet="showPlanet"/>
-  <ThePlanet :planet="planet"/>
+<NavBar :planets="planets" :planet="planet" @getPlanet="showPlanet"/>
+<PlanetPage :planet="planet"/>
 </template>
 
 <script>
-import json from "@/data/data.json";
-import MainNav from "@/components/MainNav.vue";
-import ThePlanet from "@/components/ThePlanet.vue";
+import json from '@/data/data.json';
+import NavBar from '@/components/NavBar.vue';
+import PlanetPage from '@/components/PlanetPage.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    MainNav,
-    ThePlanet
+    NavBar,
+    PlanetPage
   },
-
-  data() {
+  data(){
     return {
       planets: json,
-      planet: {},
-    };
+      planet: {}
+    }
   },
 
   methods: {
     showPlanet(planet){
       this.planet = planet;
-      console.log(planet);
     }
   },
 
-  created() {
-    this.planet = this.planets[0];
-  },
-};
+  created(){
+    this.planet = this.planets[0]
+  }
+}
 </script>
 
 <style lang="scss">
-@use "@/scss/abstract/index" as a;
-@use "@/scss/boilerplate" as b;
+@use '@/scss/abstract/index' as a;
+//@use '@/scss/boilerplate';
+
 </style>
