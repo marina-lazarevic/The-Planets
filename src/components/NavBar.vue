@@ -29,6 +29,7 @@
     </button>
   </header>
 </template>
+
 <script>
 export default {
   name: "NavBar",
@@ -80,6 +81,10 @@ export default {
 
   @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
     flex-direction: column;
+  }
+
+  @media screen and (min-width: a.$screen-md) {
+    position: static;
   }
 
   @media screen and (min-width: a.$screen-lg) {

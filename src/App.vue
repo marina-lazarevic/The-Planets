@@ -1,6 +1,6 @@
 <template>
 <NavBar :planets="planets" :planet="planet" @getPlanet="showPlanet"/>
-<!-- <PlanetPage :planet="planet"/> -->
+<PlanetPage :planet="planet"/>
 </template>
 
 <script>
