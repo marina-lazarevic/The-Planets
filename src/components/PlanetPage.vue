@@ -98,10 +98,30 @@ export default {
             position: absolute;
             transform: translateY(80%);
         }
+
+        @media screen and (min-width: a.$screen-md) {
+            padding-top: 0;
+            min-height: 500px;
+
+            img {
+                transform: scale(.55);
+            }
+        }
+    }
+
+    &__info {
+        @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
+            @include a.d-flex(center, space-between);
+        }
     }
 
     &__article {
         text-align: center;
+        @media screen and (min-width: a.$screen-md) {
+            text-align: left;
+            width: 45%;
+            flex-shrink: 0;
+        }
     }
 
     &__name {
@@ -138,6 +158,16 @@ export default {
         padding: 0 1.5rem;
         @include a.d-flex(center, space-between);
         border-bottom: 1px solid rgba(a.$light, $alpha: .2);
+
+        @media screen and (min-width: a.$screen-md) {
+            position: static;
+            border-bottom: none;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0;
+            width: 45%;
+            flex-shrink: 0;
+        }
     }
 
     &__toggle-btn {
@@ -163,6 +193,30 @@ export default {
                 opacity: 1;
             }
         }
+
+        @media screen and (min-width: a.$screen-md) {
+            padding: 1.2rem;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(a.$light, $alpha: .2);
+            color: a.$light;
+
+            &:hover {
+                background-color: a.$gray;
+            }
+
+            &::before {
+                height: 100%;
+                z-index: -1;
+            }
+        }
+    }
+
+    &__stats {
+        @media screen and (min-width: a.$screen-md) {
+            @include a.d-flex(center, space-between);
+        }
     }
 
     &__stats-container {
@@ -170,14 +224,25 @@ export default {
         @include a.d-flex(center, space-between);
         padding: 1rem 1.2rem;
         margin-bottom: 1rem;
+
+        @media screen and (min-width: a.$screen-md) {
+            flex-direction: column;
+            align-items: flex-start;
+            width: 23.5%;
+        }
     }
 
     &__stats-type {
         @include a.jost-bold-sm;
+        white-space: nowrap;
+        @media screen and (min-width: a.$screen-md) {
+            margin-bottom: .5rem;
+        }
     }
 
     &__stats-item {
         @include a.antonio-md;
+        white-space: nowrap;
     }
 }
 </style>

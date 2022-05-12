@@ -1,5 +1,5 @@
 <template>
-  <header class="header" :style= "[this.nav_visibility ? {'position': 'fixed'} : {'position': 'relative'}]">
+  <header class="header" :style= "[this.nav_visibility == true && this.screen_sm == true ? {'position': 'fixed'} : {'position': 'relative'}]">
     <Transition name="header__branding-transition">
       <a href="/" v-show="show === true || this.screen_sm === false" class="header__branding">
         <span>The Planets</span>
