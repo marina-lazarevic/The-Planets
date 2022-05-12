@@ -88,7 +88,7 @@ export default {
   }
 
   @media screen and (min-width: a.$screen-lg) {
-    padding: 0 2rem;
+    padding: 0 4vw;
   }
 
   &__branding {

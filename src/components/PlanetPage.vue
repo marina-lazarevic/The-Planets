@@ -77,7 +77,13 @@ export default {
     position: relative;
 
     @media screen and (min-width: a.$screen-lg) {
-        padding: 0 2rem;
+        padding: 0 6vw;
+    }
+
+    &__row {
+        @media screen and (min-width: a.$screen-lg) {
+            @include a.d-flex(center, space-between);
+        }
     }
 
     &__img-container {
@@ -107,19 +113,35 @@ export default {
                 transform: scale(.55);
             }
         }
+
+        @media screen and (min-width: a.$screen-lg) {
+            width: 100%;
+            min-height: 650px;
+            img {
+                //position: static;
+                transform: scale(.8);
+            }
+        }
     }
 
     &__info {
         @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
             @include a.d-flex(center, space-between);
         }
+
+        @media screen and (min-width: a.$screen-lg) {
+            width: 35%;
+            flex-shrink: 0;
+        }
     }
 
     &__article {
         text-align: center;
+        @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
+            width: 45%;
+        }
         @media screen and (min-width: a.$screen-md) {
             text-align: left;
-            width: 45%;
             flex-shrink: 0;
         }
     }
@@ -159,13 +181,16 @@ export default {
         @include a.d-flex(center, space-between);
         border-bottom: 1px solid rgba(a.$light, $alpha: .2);
 
+        @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
+            width: 45%;
+        }
+
         @media screen and (min-width: a.$screen-md) {
             position: static;
             border-bottom: none;
             flex-direction: column;
             align-items: flex-start;
             padding: 0;
-            width: 45%;
             flex-shrink: 0;
         }
     }
@@ -209,6 +234,14 @@ export default {
             &::before {
                 height: 100%;
                 z-index: -1;
+            }
+        }
+
+        @media screen and (min-width: a.$screen-lg) {
+            &:hover {
+                &::before {
+                    opacity: 0;
+                }
             }
         }
     }
