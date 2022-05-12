@@ -171,7 +171,7 @@ export default {
     &::before,
     span {
       display: block;
-      transition: transform 1s a.$default-transition;
+      transition: transform .8s a.$default-transition;
     }
 
     $i: 1;
