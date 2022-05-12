@@ -2,9 +2,9 @@
 <section class="planet">
   <div class="planet__row">
     <div class="planet__img-container">
-        <img :src="require(`@/assets/planet-${planet.name.toLowerCase()}.svg`)" :alt="`${planet.name} planet`" v-show="content_type == 'geology' || content_type == 'overview'">
-        <img :src="require(`@/assets/planet-${planet.name.toLowerCase()}-internal.svg`)" :alt="`${planet.name} structure`" v-show="content_type == 'structure'">
-        <img :src="require(`@/assets/geology-${planet.name.toLowerCase()}.png`)" :alt="`${planet.name} geology`" v-show="content_type == 'geology'">
+        <img :src="require(`@/assets/planet-${planet.name.toLowerCase()}.svg`)" :alt="`${planet.name} planet`" v-show="content_type == 'geology' || content_type == 'overview'" class="planet__img">
+        <img :src="require(`@/assets/planet-${planet.name.toLowerCase()}-internal.svg`)" :alt="`${planet.name} structure`" v-show="content_type == 'structure'" class="planet__img">
+        <img :src="require(`@/assets/geology-${planet.name.toLowerCase()}.png`)" :alt="`${planet.name} geology`" v-show="content_type == 'geology'" class="planet__img">
     </div>
     <div class="planet__info">
       <article class="planet__article">

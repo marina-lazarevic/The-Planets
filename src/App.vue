@@ -1,6 +1,6 @@
 <template>
 <NavBar :planets="planets" :planet="planet" @getPlanet="showPlanet"/>
-<PlanetPage :planet="planet"/>
+<!-- <PlanetPage :planet="planet"/> -->
 </template>
 
 <script>
@@ -35,6 +35,6 @@ export default {
 
 <style lang="scss">
 @use '@/scss/abstract/index' as a;
-//@use '@/scss/boilerplate';
+@use '@/scss/boilerplate';
 
 </style>
