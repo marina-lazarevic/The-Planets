@@ -123,9 +123,8 @@ export default {
 
         @media screen and (min-width: a.$screen-lg) {
             width: 100%;
-            min-height: 650px;
+            min-height: 85vh;
             img {
-                //position: static;
                 transform: scale(.8);
             }
         }
