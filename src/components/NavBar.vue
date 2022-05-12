@@ -78,6 +78,7 @@ export default {
   border-bottom: 1px solid rgba(a.$light, $alpha: 0.2);
   background-color: a.$dark;
   @include a.d-flex(center, space-between);
+  z-index: 5;
 
   @media screen and (min-width: a.$screen-md) and (max-width: a.$screen-lg) {
     flex-direction: column;
@@ -165,31 +166,6 @@ export default {
       height: 1.2em;
       border-radius: 50%;
       margin-right: 1.2rem;
-    }
-
-    &--mercury::before {
-      background-color: a.$mercury;
-    }
-    &--venus::before {
-      background-color: a.$venus;
-    }
-    &--earth::before {
-      background-color: a.$earth;
-    }
-    &--mars::before {
-      background-color: a.$mars;
-    }
-    &--jupiter::before {
-      background-color: a.$jupiter;
-    }
-    &--saturn::before {
-      background-color: a.$saturn;
-    }
-    &--uranus::before {
-      background-color: a.$uranus;
-    }
-    &--neptune::before {
-      background-color: a.$neptune;
     }
 
     &::before,

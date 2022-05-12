@@ -13,14 +13,14 @@
         <p class="planet__source">Source: <a :href="article.source">Wikipedia</a></p>
       </article>
       <div class="planet__btn-container">
-        <button v-for="(item, index) in content" :key="index" @click="toggleContent(item)" :class='"planet__toggle-btn planet__toggle-btn--" + getKeyName(item) + " " + btnClassName(item)'>{{getKeyName(item)}}</button>
+        <button v-for="(item, index) in content" :key="index" @click="toggleContent(item)" :class='"planet__toggle-btn planet__toggle-btn--" + planet.name.toLowerCase() + " " + btnClassName(item)'>{{getKeyName(item)}}</button>
       </div>
     </div>
-    <div class="planet__stats">
-      <div v-for="(item, index) in stats" :key="index" class="planet__stats-container">
-        <p class="planet__stats-type">{{getKeyName(item)}}</p>
-        <h3 class="planet__stats-item">{{item}}</h3>
-      </div>
+  </div>
+  <div class="planet__stats">
+    <div v-for="(item, index) in stats" :key="index" class="planet__stats-container">
+      <p class="planet__stats-type">{{getKeyName(item)}}</p>
+      <h3 class="planet__stats-item">{{item}}</h3>
     </div>
   </div>
 </section>
@@ -73,16 +73,111 @@ export default {
 @use '@/scss/abstract/index' as a;
 
 .planet {
+    padding: 0 1.5rem;
+    position: relative;
+
+    @media screen and (min-width: a.$screen-lg) {
+        padding: 0 2rem;
+    }
 
     &__img-container {
         width: 100%;
         height: fit-content;
-        margin-top: 120px;
+        min-height: 450px;
+        margin-top: 74.1px;
+        padding-top: 54.5px;
         @include a.d-flex(center, center);
+        position: relative;
 
         img {
             transform: scale(.55);
         }
+
+        img:nth-of-type(3){
+            max-width: 100px;
+            position: absolute;
+            transform: translateY(70%);
+        }
+    }
+
+    &__article {
+        text-align: center;
+    }
+
+    &__name {
+        @include a.antonio-lg;
+        margin-bottom: 2rem;
+    }
+
+    &__content {
+        @include a.jost-regular-md;
+        margin-bottom: 2rem;
+    }
+
+    &__source {
+        @include a.jost-regular-md;
+        margin-bottom: 2rem;
+
+        a {
+            color: rgba(a.$light, $alpha: .5);
+            text-decoration: underline;
+            font-weight: 700;
+            transition: color .2s ease-out;
+
+            &:hover {
+                color: a.$light;
+            }
+        }
+    }
+
+    &__btn-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 0 1.5rem;
+        @include a.d-flex(center, space-between);
+        border-bottom: 1px solid rgba(a.$light, $alpha: .2);
+    }
+
+    &__toggle-btn {
+        @include a.jost-bold-sm;
+        padding: 1.2rem 0;
+        position: relative;
+        transition: color .2s ease-out; 
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 100%;
+            opacity: 0;
+        }
+
+        &.active,
+        &:hover {
+            color: a.$light;
+            &::before {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__stats-container {
+        border: 1px solid rgba(a.$light, $alpha: .2);
+        @include a.d-flex(center, space-between);
+        padding: 1rem 1.2rem;
+        margin-bottom: 1rem;
+    }
+
+    &__stats-type {
+        @include a.jost-bold-sm;
+    }
+
+    &__stats-item {
+        @include a.antonio-md;
     }
 }
 </style>
