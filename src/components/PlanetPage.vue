@@ -17,12 +17,14 @@
       </div>
     </div>
   </div>
-  <div class="planet__stats">
+  <Transition name="planet__stats-transition">
+  <div class="planet__stats" v-if="show">
     <div v-for="(item, index) in stats" :key="index" class="planet__stats-container">
       <p class="planet__stats-type">{{getKeyName(item)}}</p>
       <h3 class="planet__stats-item">{{item}}</h3>
     </div>
   </div>
+  </Transition>
 </section>
 </template>
 
@@ -45,7 +47,8 @@ export default {
   data() {
     return {
       article: {},
-      content_type: 'overview'
+      content_type: 'overview',
+      show: false
     };
   },
 
@@ -65,6 +68,10 @@ export default {
       c == this.content_type ? className = 'active' : className = '';
       return className; 
     },
+  },
+
+  mounted(){
+      this.show = true;
   }
 };
 </script>
@@ -247,6 +254,9 @@ export default {
     }
 
     &__stats {
+        height: fit-content;
+        width: 100%;
+        overflow: hidden;
         @media screen and (min-width: a.$screen-md) {
             @include a.d-flex(center, space-between);
         }
@@ -257,11 +267,20 @@ export default {
         @include a.d-flex(center, space-between);
         padding: 1rem 1.2rem;
         margin-bottom: 1rem;
+        transition: transform 1.2s a.$default-transition;
 
         @media screen and (min-width: a.$screen-md) {
             flex-direction: column;
             align-items: flex-start;
             width: 23.5%;
+        }
+
+        $i: 1;
+
+        @for $i from 1 through 4 {
+            &:nth-of-type(#{$i}) {
+                transition-delay: #{$i * 0.1}s;
+            }
         }
     }
 
@@ -277,5 +296,13 @@ export default {
         @include a.antonio-md;
         white-space: nowrap;
     }
+
+    &__stats-transition-enter-from {
+        @media screen and (min-width: a.$screen-md) {
+            .planet__stats-container {
+                transform: translateY(200%);
+            }
+        }
+  }
 }
 </style>
