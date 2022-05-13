@@ -1,26 +1,35 @@
 <template>
   <section class="planet">
     <div class="planet__row">
-      <div class="planet__img-container">
-        <img
-          :src="require(`@/assets/planet-${planet.name.toLowerCase()}.svg`)"
-          :alt="`${planet.name} planet`"
-          v-show="content_type == 'geology' || content_type == 'overview'"
-          class="planet__img"
-        />
+      <div
+        :class="`planet__img-container planet__img-container--${content_type}`"
+      >
+        <Transition name="img-transition">
+          <img
+            :key="planet"
+            :src="require(`@/assets/planet-${planet.name.toLowerCase()}.svg`)"
+            :alt="`${planet.name} planet`"
+            v-show="content_type == 'geology' || content_type == 'overview'"
+            class="
+              planet__img-container__img planet__img-container__img--planet
+            "
+          />
+        </Transition>
         <img
           :src="
             require(`@/assets/planet-${planet.name.toLowerCase()}-internal.svg`)
           "
           :alt="`${planet.name} structure`"
           v-show="content_type == 'structure'"
-          class="planet__img"
+          class="
+            planet__img-container__img planet__img-container__img--structure
+          "
         />
         <img
           :src="require(`@/assets/geology-${planet.name.toLowerCase()}.png`)"
           :alt="`${planet.name} geology`"
           v-show="content_type == 'geology'"
-          class="planet__img"
+          class="planet__img-container__img planet__img-container__img--geology"
         />
       </div>
       <div class="planet__info">
@@ -54,10 +63,14 @@
               btnClassName(item)
             "
           >
-          <span class="planet__btn-index">{{index + 1}}</span>
+            <span class="planet__btn-index">{{ index + 1 }}</span>
             {{ getKeyName(item) }}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="planet__chevron">
-            <path d="M328 112L184 256l144 144" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              class="planet__chevron"
+            >
+              <path d="M328 112L184 256l144 144" />
             </svg>
           </button>
         </div>
@@ -155,13 +168,15 @@ export default {
     padding-top: 54.5px;
     @include a.d-flex(center, center);
     position: relative;
+    overflow: hidden;
 
-    img {
+    &__img--planet,
+    &__img--structure {
       transform: scale(0.4);
       position: absolute;
     }
 
-    img:nth-of-type(3) {
+    &__img--geology {
       max-width: 100px;
       position: absolute;
       transform: translateY(80%);
@@ -171,7 +186,8 @@ export default {
       padding-top: 0;
       min-height: 500px;
 
-      img {
+      &__img--planet,
+      &__img--structure {
         transform: scale(0.55);
       }
     }
@@ -179,12 +195,28 @@ export default {
     @media screen and (min-width: a.$screen-lg) {
       width: 100%;
       min-height: 85vh;
-      img {
-        transform: scale(.85);
+      &__img--planet,
+      &__img--structure {
+        transform: scale(0.85);
       }
 
-      img:nth-of-type(3) {
+      &__img--geology {
         max-width: 115px;
+      }
+    }
+
+    &--overview {
+      .img-transition-enter-active,
+      .img-transition-leave-active {
+        transition: opacity 0.5s, transform 1s ease;
+      }
+      .img-transition-enter-from {
+        opacity: 0;
+        transform: translateY(100vh) !important;
+      }
+      .img-transition-leave-to {
+        opacity: 0;
+        transform: translateY(-100vh) !important;
       }
     }
   }
@@ -235,7 +267,7 @@ export default {
         color: a.$light;
 
         svg > path {
-            stroke: a.$light;
+          stroke: a.$light;
         }
       }
     }
@@ -311,7 +343,7 @@ export default {
       &:hover {
         border: 1px solid rgba(a.$light, $alpha: 0);
         background-color: a.$gray;
-        transition: background-color .2s ease-out;
+        transition: background-color 0.2s ease-out;
       }
 
       &::before {
@@ -324,41 +356,41 @@ export default {
       &:hover {
         &::before {
           opacity: 0;
-          transition: opacity .2s ease-out;
+          transition: opacity 0.2s ease-out;
         }
       }
     }
   }
 
   &__btn-index {
-      display: none;
-      @media screen and (min-width: a.$screen-md) {
-        display: inline-block;
-        opacity: .5;
-        margin-right: 1.2rem;
-        &::before {
-            content: '0';
-        }
+    display: none;
+    @media screen and (min-width: a.$screen-md) {
+      display: inline-block;
+      opacity: 0.5;
+      margin-right: 1.2rem;
+      &::before {
+        content: "0";
       }
+    }
   }
 
   &__chevron {
     display: none;
     @media screen and (min-width: a.$screen-md) {
-        display: block;
-        height: 1.5em;
-        width: auto;
-        position: absolute;
-        top: 50%;
-        right: 1.2rem;
-        transform: translateY(-50%) rotate(180deg);
-        path {
-            fill: none;
-            stroke: rgba(a.$light, $alpha: .5);
-            stroke-linecap: square;
-            stroke-miterlimit: 10;
-            stroke-width: 65px;
-        }
+      display: block;
+      height: 1.5em;
+      width: auto;
+      position: absolute;
+      top: 50%;
+      right: 1.2rem;
+      transform: translateY(-50%) rotate(180deg);
+      path {
+        fill: none;
+        stroke: rgba(a.$light, $alpha: 0.5);
+        stroke-linecap: square;
+        stroke-miterlimit: 10;
+        stroke-width: 65px;
+      }
     }
   }
 
