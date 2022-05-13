@@ -182,6 +182,10 @@ export default {
       img {
         transform: scale(.85);
       }
+
+      img:nth-of-type(3) {
+        max-width: 115px;
+      }
     }
   }
 
