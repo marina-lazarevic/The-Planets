@@ -54,7 +54,7 @@
               btnClassName(item)
             "
           >
-          <span class="planet__btn-index">{{index}}</span>
+          <span class="planet__btn-index">{{index + 1}}</span>
             {{ getKeyName(item) }}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="planet__chevron">
             <path d="M328 112L184 256l144 144" />
@@ -180,7 +180,7 @@ export default {
       width: 100%;
       min-height: 85vh;
       img {
-        transform: scale(0.8);
+        transform: scale(.85);
       }
     }
   }
