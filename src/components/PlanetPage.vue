@@ -2,9 +2,9 @@
   <section class="planet">
     <div class="planet__row">
       <div
-        :class="`planet__img-container planet__img-container--${content_type}`"
+        class="planet__img-container"
       >
-        <Transition name="img-transition">
+        <Transition name="planet-transiton">
           <img
             :key="planet"
             :src="require(`@/assets/planet-${planet.name.toLowerCase()}.svg`)"
@@ -14,9 +14,8 @@
             "
           />
         </Transition>
-        <Transition name="img-structure-transition">
+        <Transition name="structure-transition">
           <img
-          :key="planet"
             :src="
               require(`@/assets/planet-${planet.name.toLowerCase()}-internal.svg`)
             "
@@ -27,12 +26,14 @@
             "
           />
         </Transition>
+        <Transition name="geology-transiton">
         <img
           :src="require(`@/assets/geology-${planet.name.toLowerCase()}.png`)"
           :alt="`${planet.name} geology`"
           v-show="content_type == 'geology'"
           class="planet__img-container__img planet__img-container__img--geology"
         />
+        </Transition>
       </div>
       <div class="planet__info">
         <article class="planet__article">
@@ -143,6 +144,12 @@ export default {
   mounted() {
     this.show = true;
   },
+
+  watch: {
+    planet : function(){
+      this.content_type = "overview"
+    }
+  }
 };
 </script>
 
@@ -207,33 +214,44 @@ export default {
       }
     }
 
-    &--overview {
-      .img-transition-enter-active,
-      .img-transition-leave-active {
+
+      .planet-transiton-enter-active,
+      .planet-transiton-leave-active {
         transition: opacity 0.5s, transform 1s ease;
       }
-      .img-transition-enter-from {
+      .planet-transiton-enter-from {
         opacity: 0;
         transform: translateY(100vh) !important;
       }
-      .img-transition-leave-to {
+      .planet-transiton-leave-to {
         opacity: 0;
         transform: translateY(-100vh) !important;
       }
-    }
 
-    &--structure {
-      .img-structure-transition-enter-to,
-      .img-structure-transition-leave-from {
+      .structure-transition-enter-to,
+      .structure-transition-leave-from {
         transition: clip-path .5s ease;
         clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
       }
 
-      .img-structure-transition-leave-to,
-      .img-structure-transition-enter-from {
+      .structure-transition-leave-to,
+      .structure-transition-enter-from {
         clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
       }
-    }
+
+      .geology-transiton-enter-active,
+      .geology-transiton-leave-active {
+        transition: clip-path .5s ease;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+      .geology-transiton-enter-from {
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      }
+      .geology-transiton-leave-to {
+        transition: clip-path 0s;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      }
+
   }
 
   &__info {
