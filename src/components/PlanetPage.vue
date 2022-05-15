@@ -373,7 +373,7 @@ export default {
       border: 1px solid rgba(a.$light, $alpha: 0.2);
       color: a.$light;
 
-      &:hover {
+      &:not(.active):hover {
         border: 1px solid rgba(a.$light, $alpha: 0);
         background-color: a.$gray;
         transition: background-color 0.2s ease-out;
@@ -386,7 +386,7 @@ export default {
     }
 
     @media screen and (min-width: a.$screen-lg) {
-      &:hover {
+      &:not(.active):hover {
         &::before {
           opacity: 0;
           transition: opacity 0.2s ease-out;
