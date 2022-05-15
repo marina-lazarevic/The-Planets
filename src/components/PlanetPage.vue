@@ -9,22 +9,24 @@
             :key="planet"
             :src="require(`@/assets/planet-${planet.name.toLowerCase()}.svg`)"
             :alt="`${planet.name} planet`"
-            v-show="content_type == 'geology' || content_type == 'overview'"
             class="
               planet__img-container__img planet__img-container__img--planet
             "
           />
         </Transition>
-        <img
-          :src="
-            require(`@/assets/planet-${planet.name.toLowerCase()}-internal.svg`)
-          "
-          :alt="`${planet.name} structure`"
-          v-show="content_type == 'structure'"
-          class="
-            planet__img-container__img planet__img-container__img--structure
-          "
-        />
+        <Transition name="img-structure-transition">
+          <img
+          :key="planet"
+            :src="
+              require(`@/assets/planet-${planet.name.toLowerCase()}-internal.svg`)
+            "
+            :alt="`${planet.name} structure`"
+            v-show="content_type == 'structure'"
+            class="
+              planet__img-container__img planet__img-container__img--structure
+            "
+          />
+        </Transition>
         <img
           :src="require(`@/assets/geology-${planet.name.toLowerCase()}.png`)"
           :alt="`${planet.name} geology`"
@@ -217,6 +219,19 @@ export default {
       .img-transition-leave-to {
         opacity: 0;
         transform: translateY(-100vh) !important;
+      }
+    }
+
+    &--structure {
+      .img-structure-transition-enter-to,
+      .img-structure-transition-leave-from {
+        transition: clip-path .5s ease;
+        clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+      }
+
+      .img-structure-transition-leave-to,
+      .img-structure-transition-enter-from {
+        clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
       }
     }
   }
